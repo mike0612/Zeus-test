@@ -1,0 +1,14 @@
+.card-header {
+    background: #2f3d4a;
+    border-color: #2f3d4a;
+  
+}
+.mat-form-field{
+    width: 100%;
+}
+.mat-table{
+    width: 100%;
+}
+.example-container {
+    margin-left: 8px;
+  }

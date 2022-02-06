@@ -1,0 +1,111 @@
+
+
+<div class="row">
+
+  <div class="col-6">
+    <div class="card-body">
+      <form [formGroup]="empleadoForm">
+        <h4>Agregar Empleado</h4>
+        <div class="mb-3">
+            <label for="nombre" class="form-label">Nombre</label>
+            <input type="text" class="form-control" id="nombre" aria-describedby="nombreHelp" placeholder="Nombre"
+                formControlName="name">
+            <small *ngIf="formSubmitted && empleadoForm.get('name').hasError('required')" style="color: red;">
+                Campo requerido
+            </small>
+            <small *ngIf="formSubmitted && empleadoForm.get('name').hasError('maxlength')" style="color: red;">
+                Maximo de 30 caracteres
+            </small>
+        </div>
+        <div class="mb-3">
+            <label for="apellido" class="form-label">Apellido</label>
+            <input type="text" class="form-control" id="apellido" aria-describedby="apellidoHelp" placeholder="Apellido"
+                formControlName="last_name">
+            <small *ngIf="formSubmitted && empleadoForm.get('last_name').hasError('required')" style="color: red;">
+                Campo requerido
+            </small>
+            <small *ngIf="formSubmitted && empleadoForm.get('last_name').hasError('maxlength')" style="color: red;">
+                Maximo de 30 caracteres
+            </small>
+        </div>
+        <div class="mb-3">
+            <label for="nombre" class="form-label">Fecha de Nacimiento</label>
+            <input type="date" class="form-control" id="birthday" aria-describedby="nombreHelp"
+                placeholder="Fecha Nacimiento" formControlName="birthday">
+            <small *ngIf="formSubmitted && empleadoForm.get('birthday').hasError('required')" style="color: red;">
+                Campo requerido
+            </small>
+        </div>
+        <button type="submit" class="btn btn-primary btn-block" (click)="registarEmpleado()" >Registrar Empleado</button>
+    </form>
+    </div>
+  </div>
+    <div class="col-6">
+
+      <div class="card-body">
+        <mat-form-field>
+          <mat-label>Filtro</mat-label>
+          <input matInput  placeholder="Ex. Mia" (keyup)='applyFilter($event)'>
+        </mat-form-field>
+        
+        <div >
+          <table mat-table [dataSource]="dataSource" matSort>
+        
+            <!-- ID Column -->
+            <ng-container matColumnDef="id">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> ID </th>
+              <td mat-cell *matCellDef="let row"> {{row.id}} </td>
+            </ng-container>
+        
+            <!-- Name Column -->
+            <ng-container matColumnDef="name">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> Nombre </th>
+              <td mat-cell *matCellDef="let row"> {{row.name}} </td>
+            </ng-container>
+        
+            <!-- Last_name Column -->
+            <ng-container matColumnDef="last_name">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> Apellido </th>
+              <td mat-cell *matCellDef="let row"> {{row.last_name}} </td>
+            </ng-container>
+        
+            <!-- Fruit Column -->
+            <ng-container matColumnDef="birthday">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> Fecha de cumpleaños </th>
+              <td mat-cell *matCellDef="let row"> {{row.birthday}} </td>
+            </ng-container>
+            
+    
+            <!-- <ng-container matColumnDef="actions">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> Acciones </th>
+              <td mat-cell *matCellDef="let row"> 
+              
+                <mat-menu menu="matMenu">
+                  <a [routerLink]="[]" class="btn btn-link" role="button"><i
+                    class="fa fa-edit fa-2x"></i></a>
+                </mat-menu>
+              </td>
+            </ng-container> -->
+    
+            <tr mat-header-row *matHeaderRowDef="columns"></tr>
+            <tr mat-row *matRowDef="let row; columns: columns;"></tr>
+        
+            <!-- Row shown when there is no matching data. -->
+            <!-- <tr class="mat-row" *matNoDataRow>
+              <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
+            </tr> -->
+          </table>
+        
+          <mat-paginator [length]="data" [pageSize]="10" [pageSizeOptions]="[5, 10, 25, 100]" ></mat-paginator>
+        </div>
+      </div>
+
+  
+    </div>
+
+
+      
+</div>
+
+
+   
